@@ -1,0 +1,17 @@
+name: Say-Hello
+
+on:
+  push:               # runs on every push to main
+    branches: [ main ]
+  workflow_dispatch:  # lets you trigger it manually
+
+env:
+  GREETING: ${{ vars.GREETING || 'Hello World' }}  # uses your repo variable
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print greeting
+        run: echo "${GREETING} from GitHub Actions!"
